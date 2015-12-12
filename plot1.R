@@ -1,0 +1,6 @@
+energy <- read.table("household_power_consumption.txt", header=TRUE, sep=";", na.strings = "?")
+energy$DateTime <- as.POSIXct(paste(energy$Date, energy$Time), format="%d/%m/%Y %H:%M:%S")
+subset_energy <- subset(energy, energy$DateTime>="2007-02-01" & energy$DateTime<"2007-02-03")
+png("plot1.png", width = 480, height = 480, units="px")
+hist(subset_energy$Global_active_power, xlab="Global Active Power (kilowatts)", col = "RED", main = "Global Active Power")
+dev.off()
